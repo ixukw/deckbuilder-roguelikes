@@ -8,4 +8,4 @@ const server = Server({
 });
 
 server.app.use(cors({origin: "*"}));
-server.run(8000);
+server.run(process.env.PORT);
