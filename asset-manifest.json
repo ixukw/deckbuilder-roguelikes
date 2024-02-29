@@ -1,1 +1,15 @@
-
+{
+  "files": {
+    "main.css": "/poker-roguelike/static/css/main.21667bc1.css",
+    "main.js": "/poker-roguelike/static/js/main.db7b30dd.js",
+    "static/js/453.e98383ce.chunk.js": "/poker-roguelike/static/js/453.e98383ce.chunk.js",
+    "index.html": "/poker-roguelike/index.html",
+    "main.21667bc1.css.map": "/poker-roguelike/static/css/main.21667bc1.css.map",
+    "main.db7b30dd.js.map": "/poker-roguelike/static/js/main.db7b30dd.js.map",
+    "453.e98383ce.chunk.js.map": "/poker-roguelike/static/js/453.e98383ce.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.21667bc1.css",
+    "static/js/main.db7b30dd.js"
+  ]
+}
