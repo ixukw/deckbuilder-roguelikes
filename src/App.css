@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
+.game-container {
+  margin: 50px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.game-container button {
+  padding: 20px;
+  margin-right: 10px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.display-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 20px;
 }
-
-.App-link {
-  color: #61dafb;
+.card-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hand-container {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  display: flex;
+  flex-direction: row;
+  background: white;
+}
+.game-container .selected {
+  border: 1px solid red;
+  position: relative;
+  top: -20px;
+}
+.p1-hand, .p2-hand, .p1-bets, .p2-bets {
+  display: flex;
+  flex-direction: row;
+}
+.card {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  width: 90px;
+  height: 140px;
+  border: 1px solid black;
+  text-align: left;
+  padding: 5px;
+}
+.upper-row {
+  display: flex;
+  flex-direction: row;
+}
+.played-container {
+  display: flex;
+  flex-direction: column;
 }

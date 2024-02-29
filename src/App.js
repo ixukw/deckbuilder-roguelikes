@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import { Client } from 'boardgame.io/react';
+import { pokergame } from './game';
+import { Pokerboard } from './board';
+import { SocketIO } from 'boardgame.io/multiplayer'
+import React, {useState} from 'react';
+//import { Lobby } from 'boardgame.io/react';
+//import { Local } from 'boardgame.io/multiplayer';
 
-function App() {
+const AppClient = Client({
+  game: pokergame,
+  board: Pokerboard,
+  //multiplayer: Local(),
+  multiplayer: SocketIO({
+    server: 'http://192.168.0.48:8000',/*
+    socketOpts:{
+      cors: {
+        origin: "http://localhost:8000",
+        credentials: true,
+        allowedHeaders: ['Access-Control-Allow-Origin'],
+      },
+
+      withCredentials: true,
+    }*/
+    }),
+});
+
+const App = () => {
+  const [playerid, setPlayerid] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!playerid ?
+        <div>
+          <button onClick={() => setPlayerid('0')}>Player 0</button>
+          <button onClick={() => setPlayerid('1')}>Player 1</button>
+        </div>
+        :
+        <AppClient playerID={playerid}/>
+      }
     </div>
   );
 }
-
 export default App;
