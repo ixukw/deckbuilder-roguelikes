@@ -4,8 +4,9 @@ import cors from '@koa/cors';
 
 const server = Server({
   games: [pokergame],
-  origins: ["localhost:3000", "*", "https://ixukw.github.io/poker-roguelike"],
+  origins: ["localhost:3000", "*", "https://ixukw.github.io/poker-roguelike", Origins.LOCALHOST],
 });
 
 server.app.use(cors({origin: "*"}));
+//server.run(8000);
 server.run(process.env.PORT);

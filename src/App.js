@@ -12,7 +12,8 @@ const AppClient = Client({
   board: Pokerboard,
   //multiplayer: Local(),
   multiplayer: SocketIO({
-    server: 'https://poker-roguelike-12345678901234.adaptable.app'//'http://192.168.0.48:8000',/*
+    server: 'https://poker-roguelike-12345678901234.adaptable.app',
+    //server: `http://192.168.0.48:8000`,
     /*socketOpts:{
       cors: {
         origin: "http://localhost:8000",

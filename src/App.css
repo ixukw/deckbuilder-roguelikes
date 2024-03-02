@@ -41,6 +41,11 @@
   border: 1px solid black;
   text-align: left;
   padding: 5px;
+  font-size: 2rem;
+}
+.align {
+  display: flex;
+  text-align: left;
 }
 .upper-row {
   display: flex;
@@ -49,4 +54,20 @@
 .played-container {
   display: flex;
   flex-direction: column;
+}
+.suit-S {
+  background-color: lightgray;
+}
+.suit-H {
+  background-color: lightpink;
+}
+.suit-C {
+  background-color: lightblue;
+}
+.suit-D {
+  background-color: lightyellow;
+}
+.previous-action {
+  max-height: 50px;
+  overflow-y: scroll;
 }
