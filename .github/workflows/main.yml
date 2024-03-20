@@ -24,6 +24,11 @@ jobs:
     
     - name: Install NPM packages
       run: npm ci
+
+    - name: env Vars
+      run: |
+        touch .env
+        echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} >> .env
     
     - name: Build project
       run: npm run build
