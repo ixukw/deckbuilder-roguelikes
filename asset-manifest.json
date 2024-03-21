@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/poker-roguelike/static/css/main.b3504044.css",
-    "main.js": "/poker-roguelike/static/js/main.49e308c7.js",
-    "static/js/453.e98383ce.chunk.js": "/poker-roguelike/static/js/453.e98383ce.chunk.js",
-    "index.html": "/poker-roguelike/index.html",
-    "main.b3504044.css.map": "/poker-roguelike/static/css/main.b3504044.css.map",
-    "main.49e308c7.js.map": "/poker-roguelike/static/js/main.49e308c7.js.map",
-    "453.e98383ce.chunk.js.map": "/poker-roguelike/static/js/453.e98383ce.chunk.js.map"
+    "main.css": "/static/css/main.b3504044.css",
+    "main.js": "/static/js/main.22c5e8e2.js",
+    "static/js/453.e98383ce.chunk.js": "/static/js/453.e98383ce.chunk.js",
+    "index.html": "/index.html",
+    "main.b3504044.css.map": "/static/css/main.b3504044.css.map",
+    "main.22c5e8e2.js.map": "/static/js/main.22c5e8e2.js.map",
+    "453.e98383ce.chunk.js.map": "/static/js/453.e98383ce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b3504044.css",
-    "static/js/main.49e308c7.js"
+    "static/js/main.22c5e8e2.js"
   ]
 }
