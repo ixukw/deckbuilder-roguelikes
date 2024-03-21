@@ -8,6 +8,8 @@ let auth;
 
 console.log('discordsdk.js start')
 export async function setupDiscordSdk() {
+    discordSdk.patchUrlMappings([{prefix: '/api', target: 'https://poker-roguelike-12345678901234.adaptable.app'}]);
+
     await discordSdk.ready();
 
     // Authorize with Discord Client
