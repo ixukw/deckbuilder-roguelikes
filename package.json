@@ -1,7 +1,7 @@
 {
   "name": "poker-roguelike",
   "version": "0.1.0",
-  "homepage": "https://ixukw.github.io/poker-roguelike",
+  "homepage": "https://ixukw.github.io/",
   "private": true,
   "dependencies": {
     "@discord/embedded-app-sdk": "^1.0.1",
