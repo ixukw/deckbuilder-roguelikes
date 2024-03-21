@@ -12,7 +12,7 @@ const AppClient = Client({
   board: Pokerboard,
   //multiplayer: Local(),
   multiplayer: SocketIO({
-    server: '/api/'
+    server: '/poker-roguelike-12345678901234'
     //server: 'https://poker-roguelike-12345678901234.adaptable.app',
     //server: `http://192.168.0.48:8000`,
     /*socketOpts:{
