@@ -1,4 +1,4 @@
-import { DiscordSDK } from "@discord/embedded-app-sdk";
+import { DiscordSDK, patchUrlMappings } from "@discord/embedded-app-sdk";
 
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 
@@ -9,7 +9,8 @@ let auth;
 console.log('discordsdk.js start')
 export async function setupDiscordSdk() {
     //discordSdk.patchUrlMappings([{prefix: '/api', target: 'poker-roguelike-12345678901234.adaptable.app'}]);
-    discordSdk.patchUrlMappings([{prefix: 'http://api', target: 'poker-roguelike.onrender.com'}]);
+    patchUrlMappings([{prefix: 'http://api', target: 'poker-roguelike.onrender.com'}]);
+    
     await discordSdk.ready();
 
     // Authorize with Discord Client
