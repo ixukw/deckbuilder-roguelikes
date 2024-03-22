@@ -1,3 +1,13 @@
+# poker-roguelike
+
+This project has been converted to a discord activity using the new [embedded-app-sdk](https://discord.com/developers/docs/developer-tools/embedded-app-sdk). The frontend will not display in browser without discord activity params.
+
+Frontend at [https://ixukw.github.io/poker-roguelike](https://ixukw.github.io/poker-rogouelike).
+
+Client: `npm start`
+
+Server: `npm run serve`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
