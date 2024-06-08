@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-const displayRanks = {2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',T:'10',J:'J',Q:'Q',K:'K',A:'A','?':'?'};
-const displaySuits = {S:'♠',H:'♥',D:'♦',C:'♣','?':''};
+const displayRanks = {1:'1',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9','?':'?'};
+const displaySuits = {'?':'',W:'萬',T:'條',B:'筒'};
 
 export function Pokerboard({ ctx, G, moves, playerID }) {
     const [selected, setSelected] = useState([]);
@@ -41,10 +41,9 @@ export function Pokerboard({ ctx, G, moves, playerID }) {
     return (
         <div className="game-container">
             <h3>You are Player {playerID}.<br/>Player {ctx.currentPlayer}'s Turn to {ctx.phase}.</h3>
-            <h4>Your HP: {G.shared.hp[playerID]}. Enemy HP: {G.shared.hp[(playerID === '0' ? '1' : '0')]}</h4>
-            {console.log(G.config.previous)}
+            {/*<h4>Your HP: {G.shared.hp[playerID]}. Enemy HP: {G.shared.hp[(playerID === '0' ? '1' : '0')]}</h4>*/}
             <div className="previous">Previous Hand Played: {G.config.previous.map(x => <p>{x}</p>)}</div>
-            {ctx.phase === 'bet' && <button onClick={handleFoldClick}>Fold</button>}
+            {/*<button onClick={handleFoldClick}>Fold</button>*/}
             {ctx.phase !== 'win' && <button onClick={handlePlayClick}>{ctx.phase === 'bet' ? 'Bet' : 'Play'}</button>}
             {ctx.phase === 'win' && <button onClick={() => moves.reset()}>Ready Reset</button>}
             <div className="display-container">
@@ -84,7 +83,7 @@ export function Pokerboard({ ctx, G, moves, playerID }) {
                 </div>
                 <div className="deck">
                     <div className="card">
-                        {G.players[playerID].deck.length} / 52
+                        {G.players[playerID].deck.length} / {G.deck.length}
                     </div>
                 </div>
             </div>

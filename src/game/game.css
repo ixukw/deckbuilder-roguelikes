@@ -1,0 +1,15 @@
+.game-component {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.stack-select {
+  display: flex;
+  flex-direction: column;
+}
+.deck-display img.card {
+  margin-top: -80px;
+}
+.deck-display img.card:first-child {
+  margin-top: 0;
+}

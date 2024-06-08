@@ -1,0 +1,23 @@
+.vhand {
+	display: block; 
+}
+.vhand img.card { 
+	padding-right: 10px;
+}
+.vhand.active-hand img.card:hover { 
+	padding-right: 0px;
+	padding-left: 10px;
+}
+
+.slot {
+  border: 0.7px solid gray;
+  border-radius: 5px;
+  height: 100px;
+  width: 68.6px;
+  margin: 0;
+  margin-left: 10px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

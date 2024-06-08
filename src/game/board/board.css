@@ -1,0 +1,10 @@
+.board-component {
+  display: flex;
+  flex-direction: row;
+}
+
+.next-slots {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
