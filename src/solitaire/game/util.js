@@ -18,6 +18,14 @@ export const INIT_STATE = {
 export const GAME_CONFIG = {
   initial_slots: 4,
   initial_deals: 3,
+  modifiers: [
+    {
+      name: '+1 next stack size',
+      function: () => {
+        
+      }
+    }
+  ]
 }
 
 // this should go somewhere with game logic

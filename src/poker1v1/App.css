@@ -1,0 +1,73 @@
+.poker1v1app-container .game-container {
+  margin: 50px;
+}
+.poker1v1app-container .game-container button {
+  padding: 20px;
+  margin-right: 10px;
+}
+.poker1v1app-container .display-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.poker1v1app-container .card-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+}
+.poker1v1app-container .hand-container {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  display: flex;
+  flex-direction: row;
+  background: white;
+}
+.poker1v1app-container .game-container .selected {
+  border: 1px solid red;
+  position: relative;
+  top: -20px;
+}
+.poker1v1app-container .p1-hand, .p2-hand, .p1-bets, .p2-bets {
+  display: flex;
+  flex-direction: row;
+}
+.poker1v1app-container .card {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  width: 90px;
+  height: 140px;
+  border: 1px solid black;
+  text-align: left;
+  padding: 5px;
+  font-size: 2rem;
+}
+.poker1v1app-container .align {
+  display: flex;
+  text-align: left;
+}
+.poker1v1app-container .upper-row {
+  display: flex;
+  flex-direction: row;
+}
+.poker1v1app-container .played-container {
+  display: flex;
+  flex-direction: column;
+}
+.poker1v1app-container .suit-S {
+  background-color: lightgray;
+}
+.poker1v1app-container .suit-H {
+  background-color: lightpink;
+}
+.poker1v1app-container .suit-C {
+  background-color: lightblue;
+}
+.poker1v1app-container .suit-D {
+  background-color: lightyellow;
+}
+.poker1v1app-container .previous-action {
+  max-height: 50px;
+  overflow-y: scroll;
+}

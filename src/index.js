@@ -1,24 +1,40 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-//import reportWebVitals from './reportWebVitals';
-import { insertCoin } from 'playroomkit'
+import { SolitaireApp } from './solitaire';
+import Poker1v1App from './poker1v1/Poker1v1App';
+import { MahjongApp } from './mahjong';
 
 import './index.css';
 
-// Show popup and ask user permissions for their discord information
-/*await insertCoin({
-  gameId: "4roZe1ZWjp0zou4VY7Da",
-  discord: true
-}).catch(e => console.log(e));*/
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />
+  },
+  {
+    path: '/solitaire',
+    element: <SolitaireApp />
+  },
+  {
+    path: '/poker1v1',
+    element: <Poker1v1App />
+  },
+  {
+    path: '/mahjong',
+    element: <MahjongApp />
+  }
+])
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <RouterProvider router={router} />
 );
 
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+//import reportWebVitals from './reportWebVitals';
 //reportWebVitals();

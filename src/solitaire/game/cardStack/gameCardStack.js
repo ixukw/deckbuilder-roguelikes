@@ -69,6 +69,8 @@ export default class GameCardStack {
       }
     }
 
+    // only if last card in substack is at bottom of stack
+    // TODO: change condition to editable generic function
     if (subStack.at(-1).equals(this.cards.at(-1))) {
       return new GameCardStack(subStack);
     }

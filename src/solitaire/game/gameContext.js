@@ -72,7 +72,6 @@ const gameReducer = (state, action) => {
           if (s.size() > 0) {
             state.stacks[i] = state.stacks[i].addSubStack(s);
             s = s.clear();
-            console.log(s);
           }
           if (state.deck.hasCard()) {
             return s.addCard(state.deck.drawCard());
