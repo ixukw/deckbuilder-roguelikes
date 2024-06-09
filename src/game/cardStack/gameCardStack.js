@@ -1,7 +1,8 @@
+import { v4 as uuid } from 'uuid';
 import { checkValid } from "../util";
 
 /**
- * a stack of cards
+ * these classes are irrelevant because you cannot pass classes into reducers without fucking it up
  */
 export default class GameCardStack {
 
@@ -9,56 +10,67 @@ export default class GameCardStack {
    * @param {GameCard[]} cards initialize stack with array of cards 
    * @param {Boolean} active determines clickable and modifable attributes
    */
-  constructor(cards=[], active=false) {
+  constructor(cards=[], active=true) {
+    this.id = uuid();
     this.cards = cards;
     this.active = active;
   }
+  
+  copy() {
+    const c = new GameCardStack();
+    c.id = this.id;
+    c.cards = this.cards.map(card => card.copy());
+    c.active = this.active;
+    return c;
+  }
 
   addCard(card) {
-    this.cards.push(card);
+    const c = this.copy();
+    c.cards.push(card);
+    return c;
   }
 
+  /**
+   * Adds the substack to this stack
+   * @param {GameCardStack} stack substack to add
+   * @returns {GameCardStack}
+   */
   addSubStack(stack) {
-    this.cards = [...this.cards, stack]
+    const c = this.copy();
+    stack.cards.forEach(card => c.cards.push(card.copy()));
+    return c;
   }
 
+  /**
+   * Removes the substack from this stack
+   * @param {GameCardStack} stack substack to remove
+   * @returns {GameCardStack}
+   */
+  removeSubStack(stack) {
+    const c = this.copy();
+    c.cards.splice(this.cards.indexOf(stack.cards[0]), stack.cards.length)
+    return c;
+  }
+
+  /**
+   * Returns the substack with specified card as origin
+   * @param {GameCard} card card to originate stack from
+   * @returns {GameCardStack}
+   */
   getSubStack(card) {
-    let next = this.cards.indexOf(card)+1;
-    let siblings = [card];
-    
-    while (next) {
-    //  console.log(next);
-      const nextVal = next.attributes.card.value;
-      siblings.unshift(nextVal);
-      next = next.nextElementSibling;
-    }
-    
-    let stack = [siblings[0]];
-    //console.log(siblings);
-    for (let i=1; i<siblings.length; i++) {
-      if (checkValid(siblings[i], siblings[i-1])) {
-    //    console.log("pushing " + siblings[i])
-        stack.push(siblings[i]);
+    const subStack = [card];
+    for (let i=this.cards.indexOf(card)+1; i<this.cards.length; i++) {
+      if (checkValid(this.cards[i], this.cards[i-1])) {
+        subStack.push(this.cards[i].copy());
       }
     }
-
-    console.log("stack", stack);
-    if (stack.includes(card.value())) {
-      console.log("valid");
-      //const t = e.target.attributes.ind.value.split(',');
-      //return [stack, [t[0],t[1]]];
-    }
-    return [[],[]];
+    return new GameCardStack(subStack);
   }
 
-  removeSubStack(card) {
-
+  size() {
+    return this.cards.length;
   }
-
-  clear() {
-    this.cards = [];
-  }
-
+  
   toString() {
     return this.cards.join();
   }

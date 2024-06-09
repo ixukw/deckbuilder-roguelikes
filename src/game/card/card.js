@@ -12,7 +12,7 @@ import './card.css';
 const Card = ({ card=new GameCard(), onClick }) => {
 
   return (
-    <div>
+    <div className="card-component">
       <img className='card'
         src={`cards/${card.rank+card.suit}.svg`}
         onClick={onClick}

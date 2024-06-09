@@ -1,5 +1,6 @@
-import { CardStack } from '../';
+import { useState, useRef } from 'react';
 import { useGameContext, useGameDispatch } from '../gameContext';
+import { CardStack } from '../';
 
 import './board.css';
 
@@ -9,32 +10,23 @@ import './board.css';
  */
 const Board = () => {
   const game = useGameContext(), gameDispatch = useGameDispatch();
+  const [mouseX, setMouseX] = useState();
+  const [mouseY, setMouseY] = useState();
+  const selectedRef = useRef();
 
   function nextCards() {
-    let cols = [...game.stacks];
-    let d2 = [...game.deck];
-    for (let i=0; i<cols.length; i++) {
-      if (d2.length > 0) {
-        const cardInd = Math.floor(Math.random()*(d2.length));
-        cols[i].push(d2[cardInd]);
-        d2.splice(cardInd, 1);
-      }
-    }
-    gameDispatch({ type: 'update_deck', data: d2 });
-    gameDispatch({ type: 'update_stacks', data: cols });
   }
 
   function onSubmitEvent(e) {
     if (game.selected.length > 0) {
-      gameDispatch({ action: 'updateSubmit' });
-
-      // remove stack (TODO: handle this in updateSubmit)
-      /*let cols = [...colsState];
-      cols[selectedOrigin[0]].splice(Number(selectedOrigin[1]),sel.length);
-      
-      setCols(cols);*/
+      gameDispatch({ type: 'updateSubmit' });
     }
   }
+
+  document.addEventListener('mousemove', (e) => {
+    setMouseX(e.pageX - 20)
+    setMouseY(e.pageY + 5)
+  });
 
   return (
     <div className="board-component">
@@ -50,15 +42,15 @@ const Board = () => {
       <div>
         <div className="next-slots">
           {game.nextStacks.map((stack, i) => <CardStack stack={stack} />)}
-          <CardStack type="submit" />
-          {/*<div className="submit-slot slot" onClick={onClickCardEvent} card='blank' ind='4'>
-            Submit
-          </div>*/}
+          <CardStack stack={game.submitStacks[0]} />
         </div>
-        <div className="active-hand">
-          {game.stacks.map((col, i) => <CardStack stack={col} /> )}
+        <div className="solitaire-slots">
+          {game.stacks.map((stack, i) => <CardStack stack={stack} /> )}
         </div>
       </div>
+      {game.selected.size() > 0 && <div className="selected-stack" ref={selectedRef} style={{ left: `${mouseX}px`, top: `${mouseY}px`}}>
+        <CardStack stack={game.selected}/>
+      </div>}
     </div>
   );
 }

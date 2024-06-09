@@ -1,13 +1,18 @@
+import { GameCardStack } from './';
+
 export const INIT_STATE = {
   ranks: {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13,'A':14},
   suits: ['S','C','D','H'],
+
   deck: [],
   currentDeck: [],
-  selected: {},
-  submitted: {},
+
   stacks: [],
   nextStacks: [],
+  //nextBuffer: [],
 
+  selected: new GameCardStack([], false),
+  submitStacks: [new GameCardStack()],
   score: 0,
 }
 
@@ -16,13 +21,19 @@ export const GAME_CONFIG = {
 }
 
 // this should go somewhere with game logic
+/**
+ * Returns if card1 can stack on card2
+ * 
+ * @param {GameCard} card1 card to stack
+ * @param {GameCard} card2 card on stack
+ * @returns {Boolean} validity if card1 can stack on card2
+ */
 export function checkValid(card1, card2) {
-  const c1 = card1.split(',');
-  const c2 = card2.split(',');
-  const v1 = c1[0] === 'J' ? 11 : c1[0] === 'Q' ? 12 : c1[0] === 'K' ? 13 : c1[0] === 'A' ? 1 : c1[0];
-  const v2 = c2[0] === 'J' ? 11 : c2[0] === 'Q' ? 12 : c2[0] === 'K' ? 13 : c2[0] === 'A' ? 1 : c2[0];
-  //console.log(v1,v2,c1[1],c2[1]);
-  return v1 - v2 === 1 && c1[1] !== c2[1];
+  return getRankValue(card2.rank) - getRankValue(card1.rank) === 1 && card1.suit !== card2.suit;
+}
+
+export function getRankValue(rank) {
+  return INIT_STATE.ranks[rank];
 }
 
 export function getScore(hand) {

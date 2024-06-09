@@ -3,13 +3,26 @@
   flex-direction: row;
   gap: 20px;
 }
-.stack-select {
+.game-component .stack-select {
   display: flex;
   flex-direction: column;
 }
-.deck-display img.card {
-  margin-top: -80px;
+.game-component .deck-display {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+  margin-left: 75px;
 }
-.deck-display img.card:first-child {
-  margin-top: 0;
+.game-component .deck-display .card-component {
+  margin-left: -65px;
+}
+
+/*
+.deck-display .card-component:first-child {
+  margin-left: 0;
+}*/
+
+.game-component .selected-stack {
+  position: absolute;
 }

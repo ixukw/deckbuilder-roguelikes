@@ -1,7 +1,17 @@
+import { v4 as uuid } from 'uuid';
 export default class GameCard {
   constructor(rank, suit) {
+    this.id = uuid();
     this.rank = rank;
     this.suit = suit;
+  }
+
+  copy() {
+    const c = new GameCard();
+    c.id = this.id;
+    c.rank = this.rank;
+    c.suit = this.suit;
+    return c;
   }
 
   value() {
