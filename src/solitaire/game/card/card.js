@@ -14,7 +14,7 @@ const Card = ({ card=new GameCard(), onClick }) => {
   return (
     <div className="card-component">
       <img className='card'
-        src={`cards/${card.rank+card.suit}.svg`}
+        src={`/deckbuilder-roguelikes/cards/${card.rank+card.suit}.svg`}
         onClick={onClick}
         card={card.rank+card.suit} ind={card}
         alt={card.rank+card.suit}

@@ -1,21 +1,34 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import { SolitaireApp, Poker1v1App, MahjongApp } from './pages';
 
 import './index.css';
 
+const base = 'deckbuilder-roguelikes'
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <App />
+  },
+  {
+    path: '/solitaire',
+    element: <SolitaireApp />
+  },
+  {
+    path: '/poker1v1',
+    element: <Poker1v1App />
+  },
+  {
+    path: '/mahjong',
+    element: <MahjongApp />
+  }
+]);
+
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <HashRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/solitaire" element={<SolitaireApp />} />
-      <Route path="/poker1v1" element={<Poker1v1App />} />
-      <Route path="/mahjong" element={<MahjongApp />} />
-    </Routes>
-  </HashRouter>
+  <RouterProvider router={router} />
 );
 
 
