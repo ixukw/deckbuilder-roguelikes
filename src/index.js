@@ -1,34 +1,19 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { insertCoin } from 'playroomkit';
 import App from './App';
-import { SolitaireApp, Poker1v1App, MahjongApp } from './pages';
 
 import './index.css';
 
-const base = 'deckbuilder-roguelikes'
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <App />
-  },
-  {
-    path: '/solitaire',
-    element: <SolitaireApp />
-  },
-  {
-    path: '/poker1v1',
-    element: <Poker1v1App />
-  },
-  {
-    path: '/mahjong',
-    element: <MahjongApp />
-  }
-]);
+// Show popup and ask user permissions for their discord information
+await insertCoin({
+  gameId: "4roZe1ZWjp0zou4VY7Da",
+  discord: true
+}).catch(e => console.log(e));
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <RouterProvider router={router} />
+  <App />
 );
 
 
