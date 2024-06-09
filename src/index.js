@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import { SolitaireApp } from './solitaire';
 import Poker1v1App from './poker1v1/Poker1v1App';
@@ -8,7 +8,7 @@ import { MahjongApp } from './mahjong';
 
 import './index.css';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />
