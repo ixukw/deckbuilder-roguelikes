@@ -29,6 +29,7 @@ jobs:
       run: |
         touch .env
         echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} >> .env
+        echo CI=false >> .env
     
     - name: Build project
       run: npm run build
