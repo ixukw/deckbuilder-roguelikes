@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
 import { INIT_STATE, GAME_CONFIG } from './util';
-import { GameCard, GameCardStack } from './';
+import { GameCardStack } from './';
 
 export const GameContext = createContext();
 export const GameDispatchContext = createContext();
@@ -15,7 +15,6 @@ export function useGameDispatch() {
 
 export function GameProvider({ children }) {
   const [game, dispatch] = useReducer(gameReducer, INIT_STATE);
-
   console.log('game state:',game);
   return (
     <GameContext.Provider value={game}>
@@ -27,22 +26,32 @@ export function GameProvider({ children }) {
 }
 
 /**
- * @param {Object} state game state
+ * @param {Object} state game state -- see INIT_STATE for detail
+ * @param {action} action reducer action
  * 
- * @param {Object} action reducer action
+ * @typedef {Object} action
  * @property {String} type action type
- * @property {Object} data action data package -- see property of case for detail
+ * @property {action.data} data action data
+ * 
+ * @typedef {Object} action.data
+ * @property {GameCard} card
+ * @property {GameCardStack} stack
+ * @property {GameCardStack} addStack
+ * @property {GameCardStack} removeStack
+ * 
  */
 const gameReducer = (state, action) => {
   const data = action.data;
   switch (action.type) {
+    /**
+     * No params.
+     */
     case 'init_game': {
       return initGame();
     }
 
     /**
      * @param {GameCard} card card to add
-     * @param {Number} index index of stack to add to
      */
     case 'add_card_to_stack': {
       return {...state,
@@ -54,10 +63,23 @@ const gameReducer = (state, action) => {
       return {...state};
     }
 
+    /**
+     * No params.
+     */
     case 'draw_nextStacks': {
       return {...state,
-        nextStacks: state.nextStacks.map(s => s)
-      };
+        nextStacks: state.nextStacks.map((s,i) => {
+          if (s.size() > 0) {
+            state.stacks[i] = state.stacks[i].addSubStack(s);
+            s = s.clear();
+            console.log(s);
+          }
+          if (state.deck.hasCard()) {
+            return s.addCard(state.deck.drawCard());
+          }
+          return s;
+        })
+      }
     }
 
     /**
@@ -67,19 +89,27 @@ const gameReducer = (state, action) => {
       return {...state, selected: data.stack.copy()};
     }
 
+    /**
+     * @param {GameCardStack} stack stack to add to
+     * @param {GameCardStack} subStack substack to add
+     */
     case 'add_stack_to_stack': {
       return {...state,
-        stacks: state.stacks.map(s => s.id === data.stack.id ? s.addSubStack(data.addStack) : s),
-        nextStacks: state.nextStacks.map(s => s.id === data.stack.id ? s.addSubStack(data.addStack) : s),
-        submitStacks: state.submitStacks.map(s => s.id === data.stack.id ? s.addSubStack(data.addStack) : s)
+        stacks: state.stacks.map(s => s.id === data.stack.id ? s.addSubStack(data.subStack) : s),
+        nextStacks: state.nextStacks.map(s => s.id === data.stack.id ? s.addSubStack(data.subStack) : s),
+        submitStacks: state.submitStacks.map(s => s.id === data.stack.id ? s.addSubStack(data.subStack) : s)
       }
     }
 
+    /**
+     * @param {GameCardStack} stack stack to remove from
+     * @param {GameCardStack} subStack substack to remove
+     */
     case 'remove_stack_from_stack': {
       return {...state,
-        stacks: state.stacks.map(s => s.id === data.stack.id ? s.removeSubStack(data.removeStack) : s),
-        nextStacks: state.nextStacks.map(s => s.id === data.stack.id ? s.removeSubStack(data.removeStack) : s),
-        submitStacks: state.submitStacks.map(s => s.id === data.stack.id ? s.removeSubStack(data.removeStack) : s)
+        stacks: state.stacks.map(s => s.id === data.stack.id ? s.removeSubStack(data.subStack) : s),
+        nextStacks: state.nextStacks.map(s => s.id === data.stack.id ? s.removeSubStack(data.subStack) : s),
+        submitStacks: state.submitStacks.map(s => s.id === data.stack.id ? s.removeSubStack(data.subStack) : s)
       }
     }
 
@@ -92,12 +122,9 @@ function initGame() {
   const game = INIT_STATE;
 
   // create deck
-  for (const r in game.ranks) {
-    for (const s of game.suits) {
-      game.deck.push(new GameCard(r, s));
-    }
-  }
-  game.currentDeck = game.deck.map(card => card.copy());
+  game.deck.setRanks(game.ranks);
+  game.deck.setSuits(game.suits);
+  game.deck.generateDeck();
 
   // create slots
   for (let i=0; i<GAME_CONFIG.initial_slots; i++) {
@@ -107,10 +134,8 @@ function initGame() {
 
   // fill slots
   for (let i=0; i<game.stacks.length; i++) {
-    for (let j=0; j<5; j++) {
-      const index = Math.floor(Math.random()*game.currentDeck.length);
-      game.stacks[i].cards.push(game.currentDeck[index]);
-      game.currentDeck.splice(index,1);
+    for (let j=0; j<GAME_CONFIG.initial_deals; j++) {
+      game.stacks[i].cards.push(game.deck.drawCard());
     }
   }
 

@@ -14,6 +14,10 @@ export default class GameCard {
     return c;
   }
 
+  equals(card) {
+    return this.rank === card.rank && this.suit === card.suit && this.id === card.id;
+  }
+
   value() {
     return this.rank; // TODO: fetch rank dynamically in case value of rank changes mid play
   }

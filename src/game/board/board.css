@@ -3,8 +3,13 @@
   flex-direction: row;
 }
 
-.next-slots {
+.board-component .next-slots {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+}
+
+.board-component .buttons {
+  display: flex;
+  flex-direction: column;
 }

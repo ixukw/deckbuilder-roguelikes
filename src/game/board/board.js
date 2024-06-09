@@ -14,7 +14,8 @@ const Board = () => {
   const [mouseY, setMouseY] = useState();
   const selectedRef = useRef();
 
-  function nextCards() {
+  function onDrawEvent(e) {
+    gameDispatch({ type: 'draw_nextStacks' })
   }
 
   function onSubmitEvent(e) {
@@ -33,9 +34,8 @@ const Board = () => {
       <div>
         <p>Next</p>
         
-        <div>
-          <button onClick={nextCards}>Draw</button>
-          {/*<button onClick={() => {}}>Deselect</button>*/}
+        <div className="buttons">
+          <button onClick={onDrawEvent}>Draw</button>
           <button onClick={onSubmitEvent}>Submit</button>
         </div>
       </div>

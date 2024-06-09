@@ -17,12 +17,13 @@ const CardStack = ({ stack=new GameCardStack() }) => {
     if (stack.active) {
       const subStack = stack.getSubStack(card);
       
-      if (game.selected.size() > 0) {
-        gameDispatch({ type: 'add_stack_to_stack', data: { stack: stack, addStack: game.selected }});
+      // TODO: midstack pickup/down functionality
+      if (game.selected.size() > 0) { // place selected on cardstack
+        gameDispatch({ type: 'add_stack_to_stack', data: { stack: stack, subStack: game.selected }});
         gameDispatch({ type: 'update_selected', data: { stack: new GameCardStack() }});
-      } else {
+      } else if (subStack.size() > 0) { // pick up cardstack
         gameDispatch({ type: 'update_selected', data: { stack: subStack }});
-        gameDispatch({ type: 'remove_stack_from_stack', data: { stack: stack, removeStack: subStack }});
+        gameDispatch({ type: 'remove_stack_from_stack', data: { stack: stack, subStack: subStack }});
       }
     }
   }
@@ -30,7 +31,7 @@ const CardStack = ({ stack=new GameCardStack() }) => {
   function onClickBlankEvent(e) {
     if (stack.active) {
       if (game.selected.size() > 0) {
-        gameDispatch({ type: 'add_stack_to_stack', data: { stack: stack, addStack: game.selected }});
+        gameDispatch({ type: 'add_stack_to_stack', data: { stack: stack, subStack: game.selected }});
         gameDispatch({ type: 'update_selected', data: { stack: new GameCardStack() }});
       }
     }

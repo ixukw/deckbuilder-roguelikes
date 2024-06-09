@@ -5,3 +5,5 @@ export { default as CardStack } from './cardStack/cardStack';
 export { default as GameCardStack } from './cardStack/gameCardStack';
 
 export { default as Board } from './board/board';
+
+export { default as GameDeck } from './deck/gameDeck';

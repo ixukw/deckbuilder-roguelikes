@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useGameContext, useGameDispatch } from './gameContext';
-import { GameCard, Card, Board } from './';
+import { Card, Board } from './';
 
 import './game.css';
 
@@ -9,6 +9,7 @@ const Game = () => {
 
   useEffect(() => {
     gameDispatch({ type: 'init_game' });
+    gameDispatch({ type: 'draw_nextStacks' });
   }, [])
   
   return (
@@ -19,8 +20,8 @@ const Game = () => {
           Submitted: {} ({game.score} pts)
         </div>
         <p>Turns: x</p>
-        <p>Deck Remaining: {game.currentDeck.length} / {game.deck.length}</p>
-        <div className="deck-display">{game.currentDeck.map(card => <Card card={card} />)}</div>
+        <p>Deck Remaining: {game.deck.activeDeck.length} / {game.deck.deck.length}</p>
+        <div className="deck-display">{game.deck.activeDeck.map(card => <Card card={card} />)}</div>
         <p>Modifiers</p>
       </div>
     </div>

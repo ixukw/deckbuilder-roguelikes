@@ -10,10 +10,11 @@ export default class GameCardStack {
    * @param {GameCard[]} cards initialize stack with array of cards 
    * @param {Boolean} active determines clickable and modifable attributes
    */
-  constructor(cards=[], active=true) {
+  constructor(cards=[], active=true, maxSize=64) {
     this.id = uuid();
     this.cards = cards;
     this.active = active;
+    this.maxSize = maxSize;
   }
   
   copy() {
@@ -21,12 +22,15 @@ export default class GameCardStack {
     c.id = this.id;
     c.cards = this.cards.map(card => card.copy());
     c.active = this.active;
+    c.maxSize = this.maxSize;
     return c;
   }
 
   addCard(card) {
     const c = this.copy();
-    c.cards.push(card);
+    if (this.size() < this.maxSize) {
+      c.cards.push(card);
+    }
     return c;
   }
 
@@ -64,7 +68,17 @@ export default class GameCardStack {
         subStack.push(this.cards[i].copy());
       }
     }
-    return new GameCardStack(subStack);
+
+    if (subStack.at(-1).equals(this.cards.at(-1))) {
+      return new GameCardStack(subStack);
+    }
+    return new GameCardStack();
+  }
+
+  clear() {
+    const c = this.copy();
+    c.cards = [];
+    return c;
   }
 
   size() {
