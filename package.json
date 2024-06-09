@@ -1,7 +1,7 @@
 {
   "name": "deckbuilder-roguelikes",
   "version": "0.1.0",
-  "homepage": "https://ixukw.github.io/",
+  "homepage": "https://ixukw.github.io/deckbuilder-roguelikes",
   "private": true,
   "dependencies": {
     "@discord/embedded-app-sdk": "^1.0.2",
