@@ -1,15 +1,16 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { insertCoin } from 'playroomkit';
+//import { insertCoin } from 'playroomkit';
 import App from './App';
 
 import './index.css';
 
 // Show popup and ask user permissions for their discord information
+/*
 await insertCoin({
   gameId: "4roZe1ZWjp0zou4VY7Da",
   discord: true
-}).catch(e => console.log(e));
+}).catch(e => console.log(e));*/
 
 const root = createRoot(document.getElementById('root'));
 root.render(
