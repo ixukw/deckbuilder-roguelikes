@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/deckbuilder-roguelikes/static/css/main.884e5f39.css",
-    "main.js": "/deckbuilder-roguelikes/static/js/main.4b383398.js",
+    "main.js": "/deckbuilder-roguelikes/static/js/main.0c782437.js",
     "static/js/79.7640fdfe.chunk.js": "/deckbuilder-roguelikes/static/js/79.7640fdfe.chunk.js",
     "index.html": "/deckbuilder-roguelikes/index.html",
     "main.884e5f39.css.map": "/deckbuilder-roguelikes/static/css/main.884e5f39.css.map",
-    "main.4b383398.js.map": "/deckbuilder-roguelikes/static/js/main.4b383398.js.map",
+    "main.0c782437.js.map": "/deckbuilder-roguelikes/static/js/main.0c782437.js.map",
     "79.7640fdfe.chunk.js.map": "/deckbuilder-roguelikes/static/js/79.7640fdfe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.884e5f39.css",
-    "static/js/main.4b383398.js"
+    "static/js/main.0c782437.js"
   ]
 }
