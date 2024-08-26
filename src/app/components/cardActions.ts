@@ -8,8 +8,20 @@ const getValueFunc = (card: Card) => {
 }
 
 // todo: wrap each modifier function with a prev value param
+// todo: priority
+// todo: action execute chaining to any other action, rather than successive
 export const getValue = new Action(getValueFunc,
   [
     new Modifier('Double Face Value', (card: Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; }, true),
     new Modifier('Double Jack Value', (card: Card, prevValue: number): number => { return card.rank === 11 ? prevValue * 2 : prevValue; }, true)
   ]);
+
+
+const getValueModData = [
+  {
+    name: 'Double Face Value',
+    desc: '',
+    active: false,
+    func: (card: Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; },
+  },
+]
