@@ -1,18 +1,18 @@
-import { Action, newAction } from "./action";
-import { Card } from './card';
-import { Modifier, newModifier } from "./modifier";
+import * as Action from "./action";
+import { Card } from './';
+import * as Modifier from "./modifier";
 
-const getValueFunc = (card: Card) => {
+const getValueFunc = (card: Card.Card) => {
   return card.rank;
 }
 
 // todo: wrap each modifier function with a prev value param
 // todo: priority
 // todo: action execute chaining to any other action, rather than successive
-export const getValue = newAction(getValueFunc,
+export const getValue = Action.newAction(getValueFunc,
   [
-    newModifier('Double Face Value', (card: Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; }, true),
-    newModifier('Double Jack Value', (card: Card, prevValue: number): number => { return card.rank === 11 ? prevValue * 2 : prevValue; }, true)
+    Modifier.newModifier('Double Face Value', (card: Card.Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; }, true),
+    Modifier.newModifier('Double Jack Value', (card: Card.Card, prevValue: number): number => { return card.rank === 11 ? prevValue * 2 : prevValue; }, true)
   ]
 );
 
@@ -21,6 +21,6 @@ const getValueModData = [
     name: 'Double Face Value',
     desc: '',
     active: false,
-    func: (card: Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; },
+    func: (card: Card.Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; },
   },
 ]

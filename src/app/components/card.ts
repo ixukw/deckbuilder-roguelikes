@@ -9,77 +9,39 @@
  * examples: modifier: this card gains double gold. tag: gold: gain 1$ on scoring.
  */
 import { getValue } from './cardActions';
-import { executeAction } from './action';
-import { Suit, Rank } from './gameConfig';
-import { Modifier } from './modifier';
+import { Action, Modifier, GameConfig } from './';
 import { v4 as uuid } from 'uuid';
 
 export type Card = {
-  id: String,
+  id: string,
   rank: number,
-  suit: Suit,
+  suit: GameConfig.Suit,
   getValue: Function,
-  modifiers: Modifier[],
+  modifiers: Modifier.Modifier[],
 }
 
-export const newCard = (rank: number, suit: Suit, modifiers: Modifier[] = []): Card => {
+export const newCard = (rank: number, suit: GameConfig.Suit, modifiers: Modifier.Modifier[] = []): Card => {
   return {
     id: uuid(),
     rank: rank,
     suit: suit,
     modifiers: modifiers,
     getValue: (c: Card) => {
-      console.log(c)
-      return executeAction(getValue, c);
+      console.log('getvalue:',c)
+      return Action.executeAction(getValue, c);
     }
   };
 }
 
-export const addModifier = (card: Card, modifier: Modifier): Card => {
+export const addModifier = (card: Card, modifier: Modifier.Modifier): Card => {
   console.log(card.modifiers)
   return {...card, modifiers: [...card.modifiers, modifier]};
 }
 
 export const getCardValue = (card: Card): number => {
-  return executeAction(getValue, card)
+  return Action.executeAction(getValue, card)
 }
 
 export const cardToString = (card: Card): String => {
-  return `${Rank[card.rank]} of ${Suit[card.suit]}`;
+  return `${GameConfig.Rank[card.rank]} of ${GameConfig.Suit[card.suit]}`;
 }
-/*
-class Card {
-  id: String;
-  rank: number;
-  suit: Suit;
-  getValue: Function;
-  //tags: TagModifier[];
-  modifiers: Modifier[];
-
-  constructor(rank: number, suit: Suit, modifiers: Modifier[] = []) {
-    this.id = uuid();
-    this.rank = rank;
-    this.suit = suit;
-    this.modifiers = modifiers;
-    this.getValue = () => {
-      return getValue.execute(this);
-    }
-  }
-
-  addModifier(modifier: Modifier): void {
-    this.modifiers = [...this.modifiers, modifier];
-  }
-
-  removeModifier(modifier: Modifier): void {
-    this.modifiers = this.modifiers.filter(x => x != modifier);
-  }
-
-  toString() {
-    return `${Rank[this.rank]} of ${Suit[this.suit]}`;
-  }
-
-  getId() {
-    return String(this.id);
-  }
-}
-*/
