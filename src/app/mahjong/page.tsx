@@ -2,7 +2,7 @@
 
 import styles from "./page.module.css";
 
-import { Card, Modifier, GameConfig, ActionQueue } from '../components';
+import { Card, Modifier, GameConfig, ActionQueue, Action } from '../components';
 import { v4 as uuid } from 'uuid';
 
 import { useEffect, useRef, useState } from 'react';
@@ -60,10 +60,10 @@ export default function Page() {
         <div>
           Card Data
           {selectedCard && <div>
-            <p>{Card.cardToString(selectedCard)} ({selectedCard.rank} of {selectedCard.suit})</p>
-            <p>{selectedCard.id}</p>
-            <p>Modifiers: ({selectedCard.modifiers.length > 0 ? selectedCard.modifiers.length : 0})</p>
-            {selectedCard.modifiers.map(m => <p key={m.id}><strong>{m.name}</strong>: {m.description} (active: {m.active.toString()})</p>)}
+            {Card.cardToString(selectedCard)}<br/>
+            {selectedCard.id}<br/>
+            Modifiers: ({selectedCard.modifiers.length > 0 ? selectedCard.modifiers.length : 0})<br/>
+            {selectedCard.modifiers.map(m => Modifier.modifierToJSX(m))}
           </div>}
         </div>
         <div className={styles.eventPanel}>
@@ -80,23 +80,7 @@ export default function Page() {
         <div>
           Global Action Queue &nbsp;
           <button>Process All</button><br/>
-          <div>
-            Enqueued ({ActionQueue.globalActionQueue.actions.length})
-            {ActionQueue.globalActionQueue.actions.map((q,i) => 
-              <p key={uuid()}>
-                {i}. {q.func.toString()}
-                <br/>Modifiers: ({q.modifiers.length})<br/> {q.modifiers.map(m =>
-                  <span key={uuid()}>
-                    <strong>{m.name}</strong>: {m.description} (active: {m.active.toString()})<br/>
-                  </span>
-                )}
-              </p>
-            )}
-          </div>
-          <div>
-            History ({ActionQueue.globalActionQueue.history.length})
-            {ActionQueue.globalActionQueue.history.map((q,i) => <p key={q.id}>{i}. {q.func.toString()}</p>)}
-          </div>
+          {ActionQueue.actionQueueToJSX(ActionQueue.globalActionQueue)}
         </div>
       </div>
     </div>

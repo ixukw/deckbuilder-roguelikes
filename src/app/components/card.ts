@@ -43,5 +43,5 @@ export const getCardValue = (card: Card): number => {
 }*/
 
 export const cardToString = (card: Card): String => {
-  return `${GameConfig.Rank[card.rank]} of ${GameConfig.Suit[card.suit]}`;
+  return `${GameConfig.Rank[card.rank]} of ${GameConfig.Suit[card.suit]} (${card.rank} of ${card.suit})`;
 }

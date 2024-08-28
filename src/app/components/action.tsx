@@ -20,7 +20,7 @@ export const executeAction = (act: Action, params?: any): any => {
   let history = [result];
 
   for (const mod of act.modifiers) {
-    if (mod.active) {
+    if (mod.isActive) {
       result = executeActionModifier(act, mod, result, params)
       history.push(result)
     }
@@ -33,4 +33,12 @@ export const executeAction = (act: Action, params?: any): any => {
 export const executeActionModifier = (act: Action, modifier: Modifier.Modifier, result?: any, params?: any): any => {
   let r = params ? modifier.func(params, result) : modifier.func(result);
   return r;
+}
+
+export const actionToJSX = (act: Action): JSX.Element => {
+  return <div>
+    func: {act.func.toString()}<br/>
+    Modifiers: ({act.modifiers.length})<br/>
+    {act.modifiers.map(m => Modifier.modifierToJSX(m))}
+  </div>
 }
