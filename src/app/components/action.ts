@@ -1,12 +1,15 @@
 import { Modifier } from './';
+import { v4 as uuid } from 'uuid';
 
 export type Action = {
+  id: string,
   func: Function,
   modifiers: Modifier.Modifier[]
 }
 
 export const newAction = (func: Function, modifiers: Modifier.Modifier[]): Action => {
   return {
+    id: uuid(),
     func: func,
     modifiers: modifiers
   }

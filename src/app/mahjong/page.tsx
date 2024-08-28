@@ -2,7 +2,8 @@
 
 import styles from "./page.module.css";
 
-import { Card, Modifier, GameConfig } from '../components';
+import { Card, Modifier, GameConfig, ActionQueue } from '../components';
+import { v4 as uuid } from 'uuid';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -21,29 +22,40 @@ export default function Page() {
 
   useEffect(() => {
     setDeck(Object.values(GameConfig.Rank).filter(x => !isNaN(Number(x))).map(r => Object.values(GameConfig.Suit).filter(x => !isNaN(Number(x))).map(s => Card.newCard(Number(r),Number(s)))).flat());
-
+    
     const t = Card.newCard(11,1);
-    console.log(Card.getCardValue(t))
-  }, [])
+    t.getValue(t)
+  }, []);
+
   return (
     <div>
       <h1>/modify</h1>
       <div className={styles.modifyPageBody}>
         <div>
-          Select card to modify
-          <select>
-            {deck.sort((a,b) => a.rank - b.rank).map(c =>
-              <option key={c.id} value={c.id} onClick={(e) => setCard({...deck.filter(x => x.id === e.currentTarget.value)[0]})}>
-                {Card.cardToString(c)}
-              </option>
-            )}
-          </select>
+          <p>Select card to modify&nbsp;
+            <select>
+              {deck.sort((a,b) => a.rank - b.rank).map(c =>
+                <option key={c.id} value={c.id} onClick={(e) => setCard({...deck.filter(x => x.id === e.currentTarget.value)[0]})}>
+                  {Card.cardToString(c)}
+                </option>
+              )}
+            </select>
+          </p>
 
-          <br/>Select modifier to add
-          <select>
-            
-          </select>
-          <br/><button onClick={addModToCard}>Add</button>
+          <p>Add existing modifier&nbsp;
+            <select>
+              
+            </select>
+            <button onClick={addModToCard}>Add</button>
+          </p>
+
+          <p>Create new modifier</p>
+          <p>Action to bind&nbsp;
+            <select>
+
+            </select>
+          </p>
+          Modifier<textarea></textarea><button>Add</button>
         </div>
         <div>
           Card Data
@@ -55,13 +67,36 @@ export default function Page() {
           </div>}
         </div>
         <div className={styles.eventPanel}>
-          Event Panel<br/>
-          <button>Score this</button>
+          Add Event<br/>
+          <button onClick={() => {
+
+          }}>Score card</button>
           <button>Score all</button>
           <button>Start Round</button>
           <button>End Round</button>
           <button>Draw</button>
           <button>Discard</button>
+        </div>
+        <div>
+          Global Action Queue &nbsp;
+          <button>Process All</button><br/>
+          <div>
+            Enqueued ({ActionQueue.globalActionQueue.actions.length})
+            {ActionQueue.globalActionQueue.actions.map((q,i) => 
+              <p key={uuid()}>
+                {i}. {q.func.toString()}
+                <br/>Modifiers: ({q.modifiers.length})<br/> {q.modifiers.map(m =>
+                  <span key={uuid()}>
+                    <strong>{m.name}</strong>: {m.description} (active: {m.active.toString()})<br/>
+                  </span>
+                )}
+              </p>
+            )}
+          </div>
+          <div>
+            History ({ActionQueue.globalActionQueue.history.length})
+            {ActionQueue.globalActionQueue.history.map((q,i) => <p key={q.id}>{i}. {q.func.toString()}</p>)}
+          </div>
         </div>
       </div>
     </div>

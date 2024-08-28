@@ -1,7 +1,7 @@
 .modifyPageBody {
   display: flex;
   flex-direction: row;
-  gap: 10%;
+  gap: 5%;
 }
 .eventPanel {
   display: flex;

@@ -9,7 +9,7 @@
  * examples: modifier: this card gains double gold. tag: gold: gain 1$ on scoring.
  */
 import { getValue } from './cardActions';
-import { Action, Modifier, GameConfig } from './';
+import { ActionQueue, Modifier, GameConfig } from './';
 import { v4 as uuid } from 'uuid';
 
 export type Card = {
@@ -28,7 +28,7 @@ export const newCard = (rank: number, suit: GameConfig.Suit, modifiers: Modifier
     modifiers: modifiers,
     getValue: (c: Card) => {
       console.log('getvalue:',c)
-      return Action.executeAction(getValue, c);
+      ActionQueue.pushAction(getValue);
     }
   };
 }
@@ -37,10 +37,10 @@ export const addModifier = (card: Card, modifier: Modifier.Modifier): Card => {
   console.log(card.modifiers)
   return {...card, modifiers: [...card.modifiers, modifier]};
 }
-
+/*
 export const getCardValue = (card: Card): number => {
   return Action.executeAction(getValue, card)
-}
+}*/
 
 export const cardToString = (card: Card): String => {
   return `${GameConfig.Rank[card.rank]} of ${GameConfig.Suit[card.suit]}`;

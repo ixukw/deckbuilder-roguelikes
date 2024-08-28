@@ -1,6 +1,4 @@
-import * as Action from "./action";
-import { Card } from './';
-import * as Modifier from "./modifier";
+import { Card, Action, Modifier } from './';
 
 const getValueFunc = (card: Card.Card) => {
   return card.rank;
@@ -11,8 +9,8 @@ const getValueFunc = (card: Card.Card) => {
 // todo: action execute chaining to any other action, rather than successive
 export const getValue = Action.newAction(getValueFunc,
   [
-    Modifier.newModifier('Double Face Value', (card: Card.Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; }, true),
-    Modifier.newModifier('Double Jack Value', (card: Card.Card, prevValue: number): number => { return card.rank === 11 ? prevValue * 2 : prevValue; }, true)
+    Modifier.newModifier('Double Face Value', (card: Card.Card, prevValue: number): number => { return card.rank > 10 ? prevValue * 2 : prevValue; }, true, 'doubles value of faces'),
+    Modifier.newModifier('Double Jack Value', (card: Card.Card, prevValue: number): number => { return card.rank === 11 ? prevValue * 2 : prevValue; }, true, 'doubles value of jacks')
   ]
 );
 
